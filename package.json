@@ -1,0 +1,17 @@
+{
+	"name": "lzt",
+	"version": "0.1.0",
+	"description": "Lolzteam API for node.js",
+	"license": "GPL-3.0",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/NztForum/node-lzt"
+	},
+	"author": "ne-lanskoy",
+	"private": false,
+	"bugs": {
+		"url": "https://github.com/NztForum/node-lzt/issues",
+		"email": "jiknrprt@outlook.com"
+	}
+}
