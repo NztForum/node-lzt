@@ -167,25 +167,21 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	}
 	
 	async editItem({
-		itemId, title, titleEn,
-		price, currency,
-		itemOrigin,
-		description, information,
-		emailLoginData,
-		emailType,
-		allowAskDiscount
+		itemId, currency, ...fields
 	} = {}) {
-		return await this.caller.call('POST', '/market/${itemId}/edit/', {
-			title,
-			title_en: titleEn,
-			price, currency,
-			item_origin: itemOrigin,
-			description, information,
-			has_email_login_data: emailLoginData ? 1 : undefined,
-			email_login_data: emailLoginData,
-			email_type: emailType,
-			allow_ask_discount: allowAskDiscount ? 1 : undefined
-		})
+		const params = { currency }
+		
+		const transformField = field =>
+			field.replace(/[A-Z]/g, char => `_${char.toLowerCase()}`)
+		
+		for(const key of Object.keys(fields))
+			params[`key_values[${transformField(key)}]`] = typeof fields[key] === 'boolean'
+				? fields[key]
+					? 1
+					: undefined
+				: fields[key]
+		
+		return await this.caller.call('POST', '/market/${itemId}/edit/', params)
 	}
 	
 	async addTag({ itemId, tagId } = {}) {
