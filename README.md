@@ -2,11 +2,13 @@
 
 ## Example usage
 
-	import { LZTApi } from 'lzt'
+```js
+import { LZTApi } from 'lzt'
 
-	const api = new LZTApi({ token: <your api token> })
+const api = new LZTApi({ token: <your api token> })
 
-	const me = await api.users.getUser()
-	const myPayments = await api.market.getPayments()
+const me = await api.users.getUser()
+const myPayments = await api.market.getPayments()
 
-	console.log(me, myPayments)
+console.log(me, myPayments)
+```
