@@ -1,5 +1,5 @@
 # [Lolzteam](https://lolz.guru/) API for node.js
-
+[Документация](https://github.com/NztForum/node-lzt/blob/master/docs-ru.md)
 ## Example usage
 
 ```js
