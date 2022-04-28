@@ -1,4 +1,5 @@
 import { LZTApiGroup } from '../apiGroup.js'
+import { LZTApiError } from '../errors.js'
 
 export class LZTApiMarketGroup extends LZTApiGroup {
 	static name = 'market'

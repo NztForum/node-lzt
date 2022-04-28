@@ -34,6 +34,8 @@ export class LZTApiCaller {
 		
 		if(json.errors)
 			throw new LZTApiError(json.errors)
+		if(json.error)
+			throw new LZTApiError(json.error_description || json.error)
 		
 		return json
 	}

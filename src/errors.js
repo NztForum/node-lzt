@@ -1,5 +1,9 @@
 export class LZTApiError extends Error {
-	constructor(errors) {
-		super(errors.join('\n'))
+	constructor(error) {
+		super(
+			typeof error === 'string'
+				? error
+				: errors.join('\n')
+		)
 	}
 }
