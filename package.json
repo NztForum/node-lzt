@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"description": "Lolzteam API for node.js",
 	"license": "GPL-3.0",
-	"main": "index.js",
+	"main": "src/index.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/NztForum/node-lzt"
@@ -13,5 +13,18 @@
 	"bugs": {
 		"url": "https://github.com/NztForum/node-lzt/issues",
 		"email": "jiknrprt@outlook.com"
-	}
+	},
+	"type": "module",
+	"funding": "https://lolz.guru/market/balance/transfer?username=%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B9%D0%9B%D1%8B%D0%BA%D0%BE%D0%B2&comment=node-lzt",
+	"keywords": [
+		"lzt",
+		"lolz",
+		"lolzteam"
+	],
+	"dependencies": {
+		"node-fetch": "^3.2.3"
+	},
+	"files": [
+		"src"
+	]
 }
