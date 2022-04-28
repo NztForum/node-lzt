@@ -20,7 +20,9 @@ export class LZTApiCaller {
 		params.locale = params.locale || this.options.locale
 		
 		if(method === 'GET') {
-			url.search = new URLSearchParams(params)
+			for(const key of Object.keys(params))
+				if(params[key] !== undefined)
+					url.searchParams.set(key, params[key])
 		} else {
 			options.body = new FormData()
 			for(const key of Object.keys(params))

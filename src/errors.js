@@ -3,7 +3,7 @@ export class LZTApiError extends Error {
 		super(
 			typeof error === 'string'
 				? error
-				: errors.join('\n')
+				: error.join('\n')
 		)
 	}
 }
