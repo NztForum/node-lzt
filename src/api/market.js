@@ -160,8 +160,10 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('GET', `/market/${itemId}/email-code/`, { email })
 	}
 	
-	async getEmailCode({ _cancel } = {}) {
-		return await this.caller.call('POST', `/market/${itemId}/change-password/`, { _cancel })
+	async changePassword({ itemId, _cancel } = {}) {
+		return await this.caller.call('POST', `/market/${itemId}/change-password`, {
+			_cancel: _cancel ? 1 : undefined
+		})
 	}
 	
 	async editItem({
