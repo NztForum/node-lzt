@@ -1,4 +1,12 @@
 # Документация
+Все параметры передаются в обьекте. Пример:
+```js
+import { LZTApi } from './src/api.js'
+
+const api = new LZTApi({ token: 'b5f0a0cadb79603f07ff8bf53255d3de0a478acf' })
+await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
+```
+
 ## LZTApi
  * `token: string` - токен апи, получать [тут](https://lolz.guru/account/api)
  * `locale?: string` - ISO 639-1 код языка
