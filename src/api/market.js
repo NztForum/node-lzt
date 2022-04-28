@@ -26,7 +26,8 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			'GET',
 			categoryName ? `/market/${categoryName}` : '/market',
 			{
-				pmin, pmax, title, showStickyItems,
+				pmin, pmax, title,
+				showStickyItems: showStickyItems ? 1 : undefined,
 				...categoryParams
 			}
 		)
@@ -56,7 +57,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			receiver, sender,
 			startDate, endDate,
 			wallet, comment,
-			is_hold: isHold
+			is_hold: isHold ? 1 : undefined
 		})
 	}
 	
@@ -76,7 +77,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 				: `/market/user/${userId}/orders`,
 			{
 				pmin, pmax, title,
-				showStickyItems,
+				showStickyItems: showStickyItems ? 1 : undefined,
 				...categoryParams
 			}
 		)
@@ -114,7 +115,6 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		userId, username,
 		amount, currency,
 		secretAnswer,
-		transferHold,
 		holdLengthValue,
 		holdLengthOption
 	} = {}) {
@@ -122,7 +122,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			user_id: userId,
 			username, amount, currency,
 			secret_answer: secret_Answer,
-			transfer_hold: transferHold,
+			transfer_hold: holdLengthValue ? 1 : undefined,
 			hold_length_value: holdLengthValue,
 			hold_length_option: holdLengthOption
 		})
@@ -182,7 +182,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			has_email_login_data: emailLoginData ? 1 : undefined,
 			email_login_data: emailLoginData,
 			email_type: emailType,
-			allow_ask_discount: allowAskDiscount
+			allow_ask_discount: allowAskDiscount ? 1 : undefined
 		})
 	}
 	
