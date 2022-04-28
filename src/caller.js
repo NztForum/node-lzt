@@ -9,9 +9,11 @@ export class LZTApiCaller {
 	async call(method, path, params = {}) {
 		const url = new URL(path, this.options.endpoint)
 		const options = {
+			...this.options.fetchParams,
 			method,
 			headers: {
-				Authorization: `Bearer ${this.options.token}`
+				Authorization: `Bearer ${this.options.token}`,
+				...this.options.fetchParams?.headers
 			}
 		}
 		
