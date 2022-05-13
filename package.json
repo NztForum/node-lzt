@@ -30,5 +30,11 @@
 	"engines": {
 		"node": ">=14.0.0"
 	},
-	"lockfileVersion": "2"
+	"lockfileVersion": "2",
+	"devDependencies": {
+		"eslint": "^8.15.0"
+	},
+	"script": {
+		"test": "npx eslint ."
+	}
 }
