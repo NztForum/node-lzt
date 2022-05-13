@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"eslint": "^8.15.0"
 	},
-	"script": {
+	"scripts": {
 		"test": "npx eslint ."
 	}
 }
