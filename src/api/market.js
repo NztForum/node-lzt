@@ -121,7 +121,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('POST', '/market/balance/transfer/', {
 			user_id: userId,
 			username, amount, currency,
-			secret_answer: secret_Answer,
+			secret_answer: secretAnswer,
 			transfer_hold: holdLengthValue ? 1 : undefined,
 			hold_length_value: holdLengthValue,
 			hold_length_option: holdLengthOption
