@@ -42,6 +42,24 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return resp
 	}
 	
+	async getUserItems({
+		userId = null,
+		categoryId,
+		pmin, pmax,
+		title,
+		...categoryParams
+	}) {
+		if(!userId)
+			userId = await this.#getMyUserId()
+		
+		return await this.caller.call('GET', `/market/user/${userId}/items/`, {
+			category_id: categoryId,
+			pmin, pmax,
+			title,
+			...categoryParams
+		})
+	}
+	
 	async getPayments({
 		userId = null,
 		type, pmin, pmax,
