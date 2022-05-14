@@ -139,3 +139,12 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 Удаляет тег из аккаунта
  * `itemId: number` - айди аккаунта
  * `tagId: number` - айди тега
+
+### market.getUserItems
+Возвращает все обьявления пользователя
+ * `userId?: number` - айди пользователя, если не указано берется айди текущего пользователя
+ * `categoryId?: number` - айди категории, смотреть [тут](https://github.com/grisha2217/Lolzteam-Public-API/blob/master/docs/market_api.markdown#category-id-names-list)
+ * `pmin?: number` - минимальная цена аккаунта (включительно)
+ * `pmax?: number` - максмальная цена аккаунта (включительно)
+ * `title?: string` - слово или слова, содержащиеся в названии аккаунта
+ * `...categoryParams` - параметры для конкретной категории, смотреть через код элемента (спасибо, ланской)
