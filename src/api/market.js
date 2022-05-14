@@ -81,24 +81,20 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	
 	async getOrders({
 		userId = null,
-		categoryName = null,
-		pmin, pmax, title,
-		showStickyItems,
+		categoryId,
+		pmin, pmax,
+		title,
 		...categoryParams
 	} = {}) {
 		if(!userId)
 			userId = await this.#getMyUserId()
 		
-		return await this.caller.call('GET',
-			categoryName
-				? `/market/user/${userId}/orders/${categoryName}`
-				: `/market/user/${userId}/orders`,
-			{
-				pmin, pmax, title,
-				showStickyItems: showStickyItems ? 1 : undefined,
-				...categoryParams
-			}
-		)
+		return await this.caller.call('GET', `/market/user/${userId}/orders`, {
+			category_id: categoryId,
+			pmin, pmax,
+			title,
+			...categoryParams
+		})
 	}
 	
 	async getFave() {
