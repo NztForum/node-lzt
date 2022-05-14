@@ -181,7 +181,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 					: undefined
 				: fields[key]
 		
-		return await this.caller.call('POST', '/market/${itemId}/edit/', params)
+		return await this.caller.call('POST', `/market/${itemId}/edit/`, params)
 	}
 	
 	async addTag({ itemId, tagId } = {}) {
