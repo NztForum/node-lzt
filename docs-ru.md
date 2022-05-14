@@ -44,11 +44,11 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 ### market.getOrders
 Возвращает заказы пользователя
  * `userId?: number` - айди пользователя, если не указано берется айди текущего пользователя
- * `categoryName?: string` - название категории
+ * `categoryId?: number` - айди категории, смотреть [тут](https://github.com/grisha2217/Lolzteam-Public-API/blob/master/docs/market_api.markdown#category-id-names-list)
  * `pmin?: number` - минимальная цена аккаунта (включительно)
  * `pmax?: number` - максмальная цена аккаунта (включительно)
  * `title?: string` - слово или слова, содержащиеся в названии аккаунта
- * `showStickyItems?: boolean` - если true, будут возвращаться закрепленные аккаунты (а они есть? спасибо ланскому за кривые доки)
+ * `...categoryParams` - параметры для конкретной категории, смотреть через код элемента (спасибо, ланской)
 
 ### market.getFave
 Возвращает избранные аккаунты
