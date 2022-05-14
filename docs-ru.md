@@ -92,6 +92,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
  * `title?: string` - название аккаунта, если не указано, titleEn будет автоматически переведен на русский язык
  * `titleEn?: string` - название аккаунта на английском, если не указано, title будет автоматически переведен на английский язык
  * `price: number` - цена аккаунта в вашей валюте
+ * `categoryId?: number` - айди категории, смотреть [тут](https://github.com/grisha2217/Lolzteam-Public-API/blob/master/docs/market_api.markdown#category-id-names-list)
  * `currency: string` - валюта для параметра price
  * `itemOrigin: string` - происхождение аккаунта
  * `description?: string` - публичное описание аккаунта

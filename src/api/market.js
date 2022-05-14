@@ -144,7 +144,9 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	
 	async addItem({
 		title, titleEn,
-		price, currency,
+		price,
+		categoryId,
+		currency,
 		itemOrigin,
 		description, information,
 		emailLoginData,
@@ -154,7 +156,9 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('POST', '/market/item/add/', {
 			title,
 			title_en: titleEn,
-			price, currency,
+			price,
+			category_id: categoryId,
+			currency,
 			item_origin: itemOrigin,
 			description, information,
 			has_email_login_data: emailLoginData ? 1 : undefined,
