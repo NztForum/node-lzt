@@ -4,7 +4,7 @@ import { LZTApiCaller } from './caller.js'
 export class LZTApi {
 	constructor(options) {
 		this.options = {
-			endpoint: 'https://api.lolz.guru/',
+			endpoint: 'https://api.zelenka.guru/',
 			locale: 'ru',
 			...options
 		}
