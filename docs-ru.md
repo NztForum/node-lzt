@@ -8,7 +8,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 ```
 
 ## LZTApi
- * `token: string` - токен апи, получать [тут](https://zelenka.guru/account/api)
+ * `token: string` - токен апи, получать [тут](https://lolz.guru/account/api)
  * `locale?: string` - ISO 639-1 код языка
  * `fetchParams?: Object` - дополнительные параметры для node-fetch
 
