@@ -13,7 +13,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
  * `fetchParams?: Object` - дополнительные параметры для node-fetch
 
 ## LZTApi#market
-Маркет, в целом повторяет [http api](https://github.com/grisha2217/Lolzteam-Public-API/blob/master/docs/market_api.markdown)
+Маркет, в целом повторяет [http api](https://github.com/NztForum/Lolzteam-Public-API/blob/master/docs/market_api.markdown)
 
 ### market.search
 Поиск аккаунтов по параметрам
