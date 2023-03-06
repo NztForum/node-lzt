@@ -124,6 +124,13 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	async confirmBuy({ itemId } = {}) {
 		return await this.caller.call('POST', `/${itemId}/confirm-buy`)
 	}
+
+	async fastBuy({ itemId, price, skipValidation} = {}) {
+		return await this.caller.call('POST', `/${itemId}/fast-buy`, {
+			buy_without_validation: skipValidation ? 1 : undefined,
+			price
+		})
+	}
 	
 	async transfer({
 		userId, username,
