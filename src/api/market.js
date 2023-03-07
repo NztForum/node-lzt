@@ -184,6 +184,10 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	async getEmailCode({ itemId, email } = {}) {
 		return await this.caller.call('GET', `/${itemId}/email-code/`, { email })
 	}
+
+	async refuseGuarantee({ itemId } = {}) {
+		return await this.caller.call('POST', `/${itemId}/refuse-guarantee`)
+	}
 	
 	async changePassword({ itemId, _cancel } = {}) {
 		return await this.caller.call('POST', `/${itemId}/change-password`, {
