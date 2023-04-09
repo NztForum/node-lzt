@@ -22,7 +22,8 @@
 		"lolzteam"
 	],
 	"dependencies": {
-		"node-fetch": "^3.2.3"
+		"node-fetch": "^3.2.3",
+		"p-queue": "^7.3.4"
 	},
 	"files": [
 		"src"

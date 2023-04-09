@@ -11,6 +11,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
  * `token: string` - токен апи, получать [тут](https://lolz.guru/account/api)
  * `locale?: string` - ISO 639-1 код языка
  * `fetchParams?: Object` - дополнительные параметры для node-fetch
+ * `interval_between_requests?: number` - интервал между запросами в мс, если не указано - 3000 мс
 
 ## LZTApi#market
 Маркет, в целом повторяет [http api](https://github.com/NztForum/Lolzteam-Public-API/blob/master/docs/market_api.markdown)
