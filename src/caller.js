@@ -37,9 +37,10 @@ export class LZTApiCaller {
 					options.body.set(key, params[key])
 		}
 		
-		const resp = await this.queue.add(() => fetch(url.href, options))
+		const promise = this.queue.add(() => fetch(url.href, options))
 		this.queue.add(() => new Promise(r => setTimeout(r, this.options.interval_between_requests)))
-		
+		const resp = await promise
+
 		if(resp.status !== 200) {
 			throw new LZTApiError(resp.statusText);
 		}
