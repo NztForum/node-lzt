@@ -37,8 +37,8 @@ export class LZTApiCaller {
 					options.body.set(key, params[key])
 		}
 		
-		const requestFunction = fetch.bind(this, url.href, options)
-		const resp = await this.addRequestToQueue(requestFunction);
+		const resp = await this.queue.add(() => fetch(url.href, options))
+		this.queue.add(() => new Promise(r => setTimeout(r, this.options.interval_between_requests)))
 		
 		if(resp.status !== 200) {
 			throw new LZTApiError(resp.statusText);
@@ -52,19 +52,5 @@ export class LZTApiCaller {
 			throw new LZTApiError(json.error_description || json.error)
 		
 		return json
-	}
-
-	addRequestToQueue(requestFunction) {
-		return new Promise((resolve, reject) => {
-			this.queue.add(async () => {
-				try {
-					const result = await requestFunction()
-					resolve(result)
-				} catch (e) {
-					reject(e)
-				}
-				await new Promise((resolve) => setTimeout(() => resolve(), this.options.interval_between_requests))
-			})
-		});
 	}
 }
