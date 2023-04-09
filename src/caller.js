@@ -41,7 +41,7 @@ export class LZTApiCaller {
 		this.queue.add(() => new Promise(r => setTimeout(r, this.options.interval_between_requests)))
 		const resp = await promise
 
-		if(resp.status !== 200) {
+		if(resp.status !== 200 && !resp.headers.get('content-type')?.includes("application/json")) {
 			throw new LZTApiError(resp.statusText);
 		}
 
