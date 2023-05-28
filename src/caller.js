@@ -1,9 +1,16 @@
 import fetch, { FormData } from 'node-fetch'
+import PQueue from 'p-queue'
 import { LZTApiError } from './errors.js'
 
+const DEFAULT_MIN_INTERVAL_BETWEEN_REQUESTS_MS = 3000;
+
 export class LZTApiCaller {
-	constructor(options) {
+	constructor(options = {}) {
 		this.options = options
+		if(this.options.interval_between_requests === undefined) {
+			this.options.interval_between_requests = DEFAULT_MIN_INTERVAL_BETWEEN_REQUESTS_MS;
+		} 
+		this.queue = new PQueue({ concurrency: 1 })
 	}
 	
 	async call(method, path, params = {}) {
@@ -30,9 +37,15 @@ export class LZTApiCaller {
 					options.body.set(key, params[key])
 		}
 		
-		/* add queue and rate limits here? */
-		const resp = await fetch(url.href, options)
-		const json = await resp.json()
+		const promise = this.queue.add(() => fetch(url.href, options))
+		this.queue.add(() => new Promise(r => setTimeout(r, this.options.interval_between_requests)))
+		const resp = await promise
+
+		if(resp.status !== 200 && !resp.headers.get('content-type')?.includes("application/json")) {
+			throw new LZTApiError(resp.statusText);
+		}
+
+		const json = await resp.json();
 		
 		if(json.errors)
 			throw new LZTApiError(json.errors)
