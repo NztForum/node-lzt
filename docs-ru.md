@@ -1,5 +1,5 @@
 # Документация
-Все параметры передаются в обьекте. Пример:
+Все параметры передаются в объекте. Пример:
 ```js
 import { LZTApi } from './src/api.js'
 
@@ -8,7 +8,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 ```
 
 ## LZTApi
- * `token: string` - токен апи, получать [тут](https://lolz.guru/account/api)
+ * `token: string` - токен API, получать [тут](https://lolz.guru/account/api)
  * `locale?: string` - ISO 639-1 код языка
  * `fetchParams?: Object` - дополнительные параметры для node-fetch
 
@@ -19,7 +19,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 Поиск аккаунтов по параметрам
  * `categoryName?: string` - название категории, если не указано возвращает последние аккаунты
  * `pmin?: number` - минимальная цена аккаунта (включительно)
- * `pmax?: number` - максмальная цена аккаунта (включительно)
+ * `pmax?: number` - максимальная цена аккаунта (включительно)
  * `title?: string` - слово или слова, содержащиеся в названии аккаунта
  * `showStickyItems?: boolean` - если true, будут возвращаться закрепленные аккаунты
  * `...categoryParams` - параметры для конкретной категории, смотреть через код элемента (спасибо, ланской)
@@ -32,9 +32,9 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
  * `userId?: number` - айди пользователя, если не указано берется айди текущего пользователя
  * `type?: 'income'|'cost'|'refilled_balance'|'withdrawal_balance'|'paid_item'|'sold_item'|'money_transfer'|'receiving_money'|'internal_purchase'|'claim_hold'` - тип операции
  * `pmin?: number` - минимальная сумма операции (включительно)
- * `pmax?: number` - максмальная сумма операции (включительно)
- * `receiver?: string` - юзернем пользователя, получившего деньги
- * `sender?: string` - юзернем пользователя, отправившего деньги
+ * `pmax?: number` - максимальная сумма операции (включительно)
+ * `receiver?: string` - юзернейм пользователя, получившего деньги
+ * `sender?: string` - юзернейм пользователя, отправившего деньги
  * `startDate?: string` - начало интервала даты операции (в формате RFC 3339)
  * `endDate?: string` - конец интервала даты операции (в формате RFC 3339)
  * `wallet?: string` - кошелек использованный для вывода денег
@@ -46,7 +46,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
  * `userId?: number` - айди пользователя, если не указано берется айди текущего пользователя
  * `categoryId?: number` - айди категории, смотреть [тут](https://github.com/grisha2217/Lolzteam-Public-API/blob/master/docs/market_api.markdown#category-id-names-list)
  * `pmin?: number` - минимальная цена аккаунта (включительно)
- * `pmax?: number` - максмальная цена аккаунта (включительно)
+ * `pmax?: number` - максимальная цена аккаунта (включительно)
  * `title?: string` - слово или слова, содержащиеся в названии аккаунта
  * `...categoryParams` - параметры для конкретной категории, смотреть через код элемента (спасибо, ланской)
 
@@ -81,7 +81,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 ### market.transfer
 Переводит деньги другому пользователю
  * `userId?: number` - айди пользователя
- * `username?: string` - юзернем пользователя
+ * `username?: string` - юзернейм пользователя
  * `amount: number` - сумма в вашей валюте
  * `currency: string` - валюта для параметра amount
  * `holdLengthValue: number` - значение холда
@@ -104,7 +104,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 ### market.checkItem
 Проверяет добавленный аккаунт
  * `itemId: number` - айди аккаунта
- * `closeItem?: number` - если true, обьявление будет закрыто
+ * `closeItem?: number` - если true, объявление будет закрыто
 
 ### market.getEmailCode
 Получает код или ссылку с почты
@@ -142,10 +142,10 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
  * `tagId: number` - айди тега
 
 ### market.getUserItems
-Возвращает все обьявления пользователя
+Возвращает все объявления пользователя
  * `userId?: number` - айди пользователя, если не указано берется айди текущего пользователя
  * `categoryId?: number` - айди категории, смотреть [тут](https://github.com/grisha2217/Lolzteam-Public-API/blob/master/docs/market_api.markdown#category-id-names-list)
  * `pmin?: number` - минимальная цена аккаунта (включительно)
- * `pmax?: number` - максмальная цена аккаунта (включительно)
+ * `pmax?: number` - максимальная цена аккаунта (включительно)
  * `title?: string` - слово или слова, содержащиеся в названии аккаунта
  * `...categoryParams` - параметры для конкретной категории, смотреть через код элемента (спасибо, ланской)
