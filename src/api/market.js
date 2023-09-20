@@ -288,12 +288,6 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('GET', `/${categoryName}/games/`)
 	}
 
-	async fastBuy({ itemId, price, skipValidation } = {}) {
-		return await this.caller.call('POST', `/${itemId}/fast-buy`, {
-			buy_without_validation: skipValidation ? 1 : 0,
-			price
-		})
-	}
 
 	async bumpItem({ itemId } = {}) {
 		return await this.caller.call('POST', `/${itemId}/bump/`)
@@ -307,13 +301,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('GET', `/me/`)
 	}
 
-	async editMe({ disableSteamGuard,
-					 userAllowAskDiscount,
-					 maxDiscountPercent,
-					 allowAcceptAccounts,
-					 hideFavorites,
-					 vkUa
-				 } = {}) {
+	async editMe({ disableSteamGuard, userAllowAskDiscount, maxDiscountPercent, allowAcceptAccounts, hideFavorites, vkUa } = {}) {
 		return await this.caller.call('PUT', `/me/`, {
 			disable_steam_guard: disableSteamGuard,
 			user_allow_ask_discount: userAllowAskDiscount,
