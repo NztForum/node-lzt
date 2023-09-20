@@ -1,4 +1,4 @@
-# [Lolzteam](https://lolz.guru/) API for node.js
+# [Lolzteam Market](https://lzt.market/) API for node.js
 
 ## ⚠️ Attention! This project uses ES modules.
 ### Please make sure you have `"type": "module"` in your package.json
