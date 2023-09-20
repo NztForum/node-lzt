@@ -174,7 +174,9 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			allow_ask_discount: allowAskDiscount
 		})
 	}
-	
+	async getNotPublishedItem({ itemId, resell_item_id } = {}) {
+		return await this.caller.call('GET', `/${itemId}/goods/add/`, { resell_item_id })
+	}
 	async checkItem({ itemId, closeItem } = {}) {
 		return await this.caller.call('POST', `/${itemId}/goods/check`, {
 			close_item: closeItem
@@ -219,5 +221,155 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	
 	async deleteTag({ itemId, tagId } = {}) {
 		return await this.caller.call('DELETE', `/${itemId}/tag/`, { tag_id: tagId })
+	}
+
+	async deleteItem({ itemId, reason } = {}) {
+		return await this.caller.call('DELETE', `/${itemId}`, { reason })
+	}
+
+	async getMafile({ itemId } = {}) {
+		return await this.caller.call('GET', `/${itemId}/mafile/`)
+	}
+
+	async getGuardCode({ itemId } = {}) {
+		return await this.caller.call('GET', `/${itemId}/guard-code/`)
+	}
+
+	async getTelegramCode({ itemId } = {}) {
+		return await this.caller.call('GET', `/${itemId}/telegram-login-code/`)
+	}
+
+	async resetTelegramAuth({ itemId } = {}) {
+		return await this.caller.call('POST', `/${itemId}/telegram-reset-authorizations/`)
+	}
+
+	async getTempEmailPassword({ itemId } = {}) {
+		return await this.caller.call('GET', `/${itemId}/temp-email-password/`)
+	}
+
+	async fave({ itemId } = {}) {
+		return await this.caller.call('POST', `/${itemId}/star/`)
+	}
+
+	async unFave({ itemId } = {}) {
+		return await this.caller.call('DELETE', `/${itemId}/star/`)
+	}
+
+	async stickItem({ itemId } = {}) {
+		return await this.caller.call('POST', `/${itemId}/stick/`)
+	}
+
+	async unstickItem({ itemId } = {}) {
+		return await this.caller.call('DELETE', `/${itemId}/stick/`)
+	}
+
+	async changeOwner({ itemId, username, secretAnswer, } = {}) {
+		return await this.caller.call('POST', `/${itemId}/change-owner/`, {
+			username,
+			secret_answer: secretAnswer
+		})
+	}
+
+	async steamValue({ link, appId, currency, ignore_cache } = {}) {
+		return await this.caller.call('GET', `/steam-value/`, {
+			link, app_id: appId, currency, ignore_cache
+		})
+	}
+
+	async steamPreview({ itemId, type } = {}) {
+		return await this.caller.call('GET', `/${itemId}/steam-preview/`, { type })
+	}
+
+	async getCategoryParams({ categoryName } = {}) {
+		return await this.caller.call('GET', `/${categoryName}/params/`)
+	}
+
+	async getGames({ categoryName } = {}) {
+		return await this.caller.call('GET', `/${categoryName}/games/`)
+	}
+
+	async fastBuy({ itemId, price, skipValidation} = {}) {
+		return await this.caller.call('POST', `/${itemId}/fast-buy`, {
+			buy_without_validation: skipValidation ? 1 : 0,
+			price
+		})
+	}
+
+	async bumpItem({ itemId } = {}) {
+		return await this.caller.call('POST', `/${itemId}/bump/`)
+	}
+
+	async getCategories({ topQueries } = {}) {
+		return await this.caller.call('GET', `/categories/`, { top_queries: topQueries ? 1 : 0 })
+	}
+
+	async getMe() {
+		return await this.caller.call('GET', `/me/`)
+	}
+
+	async editMe({ disableSteamGuard,
+					 userAllowAskDiscount,
+					 maxDiscountPercent,
+					 allowAcceptAccounts,
+					 hideFavorites,
+					 vkUa
+				 } = {}) {
+		return await this.caller.call('PUT', `/me/`, {
+			disable_steam_guard: disableSteamGuard,
+			user_allow_ask_discount: userAllowAskDiscount,
+			max_discount_percent: maxDiscountPercent,
+			allow_accept_accounts: allowAcceptAccounts,
+			hide_favorites: hideFavorites,
+			vk_ua: vkUa
+		})
+	}
+
+	async getProxy() {
+		return await this.caller.call('GET', `/proxy/`)
+	}
+
+	async addProxy({ proxyIP, proxyPort, proxyLogin, proxyPassword } = {}) {
+		return await this.caller.call('POST', `/proxy/`, {
+			proxy_ip: proxyIP,
+			proxy_port: proxyPort,
+			proxy_user: proxyLogin,
+			proxy_pass: proxyPassword
+		})
+	}
+
+	async deleteProxy({ proxyId, deleteAll } = {}) {
+		return await this.caller.call('DELETE', `/proxy/`, {
+			proxy_id: proxyId,
+			delete_all: deleteAll ? 1 : 0
+		})
+	}
+
+	async fastSell({
+		title, titleEn,
+		price, categoryId,
+		currency, itemOrigin,
+		extendedGuarantee,
+		description, information,
+		login, password, loginPassword,
+		hasEmailLoginData, EmailLoginData,
+		closeItem, emailType, allowAskDiscount,
+		proxyId, randomProxy, ...extraData
+				   } = {}) {
+		return await this.caller.call('POST', `/fast-sell/`, {
+			title, title_en: titleEn,
+			price, category_id: categoryId,
+			currency, item_origin: itemOrigin,
+			extended_guarantee: extendedGuarantee,
+			description, information,
+			login, password, login_password: loginPassword,
+			has_email_login_data: hasEmailLoginData ? 1 : 0,
+			email_login_data: EmailLoginData,
+			close_item: closeItem,
+			email_type: emailType,
+			allow_ask_discount: allowAskDiscount,
+			proxy_id: proxyId,
+			random_proxy: randomProxy,
+			...extraData
+		})
 	}
 }
