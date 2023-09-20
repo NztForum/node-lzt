@@ -324,7 +324,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		})
 	}
 
-	async getProxy() {
+	async getProxys() {
 		return await this.caller.call('GET', `/proxy/`)
 	}
 
@@ -354,9 +354,8 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		login, password, loginPassword,
 		hasEmailLoginData, EmailLoginData,
 		closeItem, emailType, allowAskDiscount,
-		proxyId, randomProxy, ...extraData
-				   } = {}) {
-		return await this.caller.call('POST', `/fast-sell/`, {
+		proxyId, randomProxy, extraData } = {}) {
+		return await this.caller.call('POST', `/item/fast-sell`, {
 			title, title_en: titleEn,
 			price, category_id: categoryId,
 			currency, item_origin: itemOrigin,
@@ -370,7 +369,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			allow_ask_discount: allowAskDiscount,
 			proxy_id: proxyId,
 			random_proxy: randomProxy,
-			...extraData
+			extra: extraData
 		})
 	}
 }
