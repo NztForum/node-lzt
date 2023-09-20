@@ -174,8 +174,8 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			allow_ask_discount: allowAskDiscount
 		})
 	}
-	async getNotPublishedItem({ itemId, resellItem_Id } = {}) {
-		return await this.caller.call('GET', `/${itemId}/goods/add/`, { resell_item_id: resellItem_Id })
+	async getNotPublishedItem({ itemId, resellItemId } = {}) {
+		return await this.caller.call('GET', `/${itemId}/goods/add/`, { resell_item_id: resellItemId })
 	}
 	async checkItem({ itemId, closeItem } = {}) {
 		return await this.caller.call('POST', `/${itemId}/goods/check`, {
@@ -270,9 +270,9 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		})
 	}
 
-	async steamValue({ link, appId, currency, ignore_cache } = {}) {
+	async steamValue({ link, appId, currency, ignoreCache } = {}) {
 		return await this.caller.call('GET', `/steam-value/`, {
-			link, app_id: appId, currency, ignore_cache
+			link, app_id: appId, currency, ignore_cache: ignoreCache
 		})
 	}
 
