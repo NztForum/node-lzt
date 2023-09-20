@@ -263,7 +263,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('DELETE', `/${itemId}/stick/`)
 	}
 
-	async changeOwner({ itemId, username, secretAnswer, } = {}) {
+	async changeOwner({ itemId, username, secretAnswer } = {}) {
 		return await this.caller.call('POST', `/${itemId}/change-owner/`, {
 			username,
 			secret_answer: secretAnswer
@@ -272,7 +272,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 
 	async steamValue({ link, appId, currency, ignoreCache } = {}) {
 		return await this.caller.call('GET', `/steam-value/`, {
-			link, app_id: appId, currency, ignore_cache: ignoreCache
+			link, app_id: appId, currency, ignore_cache: ignoreCache ? 1 : 0
 		})
 	}
 
@@ -288,7 +288,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('GET', `/${categoryName}/games/`)
 	}
 
-	async fastBuy({ itemId, price, skipValidation} = {}) {
+	async fastBuy({ itemId, price, skipValidation } = {}) {
 		return await this.caller.call('POST', `/${itemId}/fast-buy`, {
 			buy_without_validation: skipValidation ? 1 : 0,
 			price
@@ -300,7 +300,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	}
 
 	async getCategories({ topQueries } = {}) {
-		return await this.caller.call('GET', `/categories/`, { top_queries: topQueries ? 1 : 0 })
+		return await this.caller.call('GET', `/category/`, { top_queries: topQueries ? 1 : 0 })
 	}
 
 	async getMe() {
@@ -328,12 +328,13 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		return await this.caller.call('GET', `/proxy/`)
 	}
 
-	async addProxy({ proxyIP, proxyPort, proxyLogin, proxyPassword } = {}) {
+	async addProxy({ proxyIP, proxyPort, proxyLogin, proxyPassword, proxyRow } = {}) {
 		return await this.caller.call('POST', `/proxy/`, {
 			proxy_ip: proxyIP,
 			proxy_port: proxyPort,
 			proxy_user: proxyLogin,
-			proxy_pass: proxyPassword
+			proxy_pass: proxyPassword,
+			proxy_row: proxyRow
 		})
 	}
 
@@ -362,7 +363,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			extended_guarantee: extendedGuarantee,
 			description, information,
 			login, password, login_password: loginPassword,
-			has_email_login_data: hasEmailLoginData ? 1 : 0,
+			has_email_login_data: hasEmailLoginData,
 			email_login_data: EmailLoginData,
 			close_item: closeItem,
 			email_type: emailType,
