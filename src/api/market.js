@@ -174,8 +174,8 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			allow_ask_discount: allowAskDiscount
 		})
 	}
-	async getNotPublishedItem({ itemId, resell_item_id } = {}) {
-		return await this.caller.call('GET', `/${itemId}/goods/add/`, { resell_item_id })
+	async getNotPublishedItem({ itemId, resellItem_Id } = {}) {
+		return await this.caller.call('GET', `/${itemId}/goods/add/`, { resell_item_id: resellItem_Id })
 	}
 	async checkItem({ itemId, closeItem } = {}) {
 		return await this.caller.call('POST', `/${itemId}/goods/check`, {
