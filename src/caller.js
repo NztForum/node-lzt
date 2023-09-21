@@ -26,7 +26,7 @@ export class LZTApiCaller {
 		
 		params.locale = params.locale || this.options.locale
 		
-		if(method === 'GET') {
+		if(method === 'GET' || method === 'PUT' || method === 'DELETE') {
 			for(const key of Object.keys(params))
 				if(params[key] !== undefined)
 					url.searchParams.set(key, params[key])

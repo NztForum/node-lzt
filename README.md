@@ -6,14 +6,14 @@
 ## [Документация](https://github.com/NztForum/node-lzt/blob/master/docs-ru.md)
 
 ## Installation
-`npm i lzt`
+`npm i @lolzteam/sdk`
 or, if you prefer yarn
-`yarn add lzt`
+`yarn add @lolzteam/sdk`
 
 ## Example usage
 
 ```js
-import { LZTApi } from 'lzt'
+import { LZTApi } from '@lolzteam/sdk'
 
 const api = new LZTApi({ token: 'your api token' })
 
