@@ -1,6 +1,6 @@
 {
 	"name": "@lolzteam/sdk",
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"description": "Lolzteam API for node.js",
 	"license": "GPL-3.0",
 	"main": "src/index.js",
