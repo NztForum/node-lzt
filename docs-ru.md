@@ -87,6 +87,7 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
  * `currency: string` - валюта для параметра amount
  * `holdLengthValue: number` - значение холда
  * `holdLengthOption: 'hour'|'day'|'week'|'month'|'year'` - тип значения холда
+ * `secretAnswer: string` - секретное слово
 
 ### market.addItem
 Добавляет аккаунт
@@ -291,3 +292,18 @@ await api.market.search({ categoryName: 'steam', pmin: 250, pmax: 250 })
 Удаляет прокси
 * `proxyId: number` - айди прокси
 * `deleteAll?: boolean` - удалить все прокси
+
+### market.getAuction
+Получение информации об аукционе
+* `itemId: number` - айди аккаунта
+
+### market.addBid
+Добавление новой ставки на аукцион
+* `itemId: number` - айди аккаунта
+* `amount: number` - сумма в вашей валюте
+* `currency: string` - валюта для параметра amount
+
+### market.removeBid
+Удаление ставки с аукциона
+* `itemId: number` - айди аккаунта
+* `bidId: number` - айди ставки, можно узнать с помощью метода market.getAuction
