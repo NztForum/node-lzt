@@ -360,4 +360,21 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 			extra: extraData
 		})
 	}
+
+    async getAuction({ itemId } = {}){
+        return await this.caller.call('GET', `/${itemId}/auction`)
+    }
+
+    async addBid({ itemId, currency, amount } = {}){
+        return await this.caller.call('POST', `/${itemId}/auction/bid`, {
+            currency,
+            amount
+        })
+    }
+
+    async removeBid({ itemId, bidId } = {}) {
+        return await this.caller.call('DELETE', `/${itemId}/auction/bid`, {
+            bid_id: bidId
+        })
+    }
 }
