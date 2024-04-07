@@ -23,7 +23,11 @@
     "api"
   ],
   "dependencies": {
+    "p-queue": "^8.0.1",
     "undici": "^6.11.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^20.12.5",
+    "typescript": "^5.4.4"
+  }
 }
