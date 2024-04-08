@@ -27,6 +27,7 @@
     "undici": "^6.11.1"
   },
   "devDependencies": {
+    "@apidevtools/swagger-parser": "^10.1.0",
     "@types/node": "^20.12.5",
     "typescript": "^5.4.4"
   }
