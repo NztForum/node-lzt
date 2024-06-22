@@ -28,8 +28,15 @@ export class LZTApiCaller {
 		
 		if(method === 'GET' || method === 'PUT' || method === 'DELETE') {
 			for(const key of Object.keys(params))
-				if(params[key] !== undefined)
-					url.searchParams.set(key, params[key])
+				if(params[key] !== undefined) {
+					if (Array.isArray(params[key])) {
+						for (let i = 0; i < params[key].length; i++) {
+							url.searchParams.set(`${key}[${i}]`, params[key][i]);
+						}
+					} else {
+						url.searchParams.set(key, params[key])
+					}
+				}
 		} else {
 			options.body = new FormData()
 			for(const key of Object.keys(params))
