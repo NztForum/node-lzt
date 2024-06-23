@@ -12,9 +12,19 @@ export class LZTApiCaller {
 		} 
 		this.queue = new PQueue({ concurrency: 1 })
 	}
-	
-	async call(method, path, params = {}) {
-		const url = new URL(path, this.options.endpoint)
+
+	async call(baseURL, method, path, params = {}) {
+		let url
+		switch (baseURL) {
+			case 'forum':
+				url = new URL(path, this.options.baseURLForum);
+				break;
+			case 'market':
+				url = new URL(path, this.options.baseURLMarket);
+				break;
+			default:
+				throw new LZTApiError('Invalid baseUrl passed.')
+		}
 		const options = {
 			...this.options.fetchParams,
 			method,

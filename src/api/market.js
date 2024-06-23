@@ -23,6 +23,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		...categoryParams
 	} = {}) {
 		return await this.caller.call(
+			'market',
 			'GET',
 			categoryName ? `/${categoryName}` : '/',
 			{
@@ -34,7 +35,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	}
 	
 	async getUser() {
-		const resp = await this.caller.call('GET', '/user')
+		const resp = await this.caller.call('market', 'GET', '/user')
 		
 		if(!this.#userId && resp?.user?.user_id)
 			this.#userId = resp.user.user_id
@@ -52,7 +53,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		if(!userId)
 			userId = await this.#getMyUserId()
 		
-		return await this.caller.call('GET', `/user/${userId}/items/`, {
+		return await this.caller.call('market', 'GET', `/user/${userId}/items/`, {
 			category_id: categoryId,
 			pmin, pmax,
 			title,
@@ -70,7 +71,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		if(!userId)
 			userId = await this.#getMyUserId()
 		
-		return await this.caller.call('GET', `/user/${userId}/payments`, {
+		return await this.caller.call('market', 'GET', `/user/${userId}/payments`, {
 			type, pmin, pmax,
 			receiver, sender,
 			startDate, endDate,
@@ -89,7 +90,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		if(!userId)
 			userId = await this.#getMyUserId()
 		
-		return await this.caller.call('GET', `/user/${userId}/orders`, {
+		return await this.caller.call('market', 'GET', `/user/${userId}/orders`, {
 			category_id: categoryId,
 			pmin, pmax,
 			title,
@@ -98,35 +99,35 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	}
 	
 	async getFave() {
-		return await this.caller.call('GET', '/fave')
+		return await this.caller.call('market', 'GET', '/fave')
 	}
 	
 	async getViewed() {
-		return await this.caller.call('GET', '/viewed')
+		return await this.caller.call('market', 'GET', '/viewed')
 	}
 	
 	async getItem({ itemId } = {}) {
-		return await this.caller.call('GET', `/${itemId}`)
+		return await this.caller.call('market', 'GET', `/${itemId}`)
 	}
 	
 	async reserve({ itemId, price } = {}) {
-		return await this.caller.call('POST', `/${itemId}/reserve`, { price })
+		return await this.caller.call('market', 'POST', `/${itemId}/reserve`, { price })
 	}
 	
 	async cancelReserve({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/cancel-reserve`)
+		return await this.caller.call('market', 'POST', `/${itemId}/cancel-reserve`)
 	}
 	
 	async checkAccount({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/check-account`)
+		return await this.caller.call('market', 'POST', `/${itemId}/check-account`)
 	}
 	
 	async confirmBuy({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/confirm-buy`)
+		return await this.caller.call('market', 'POST', `/${itemId}/confirm-buy`)
 	}
 
 	async fastBuy({ itemId, price, skipValidation} = {}) {
-		return await this.caller.call('POST', `/${itemId}/fast-buy`, {
+		return await this.caller.call('market', 'POST', `/${itemId}/fast-buy`, {
 			buy_without_validation: skipValidation ? 1 : undefined,
 			price
 		})
@@ -139,7 +140,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		holdLengthValue,
 		holdLengthOption
 	} = {}) {
-		return await this.caller.call('POST', '/balance/transfer/', {
+		return await this.caller.call('market', 'POST', '/balance/transfer/', {
 			user_id: userId,
 			username, amount, currency,
 			secret_answer: secretAnswer,
@@ -160,7 +161,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		emailType,
 		allowAskDiscount
 	} = {}) {
-		return await this.caller.call('POST', '/item/add/', {
+		return await this.caller.call('market', 'POST', '/item/add/', {
 			title,
 			title_en: titleEn,
 			price,
@@ -175,24 +176,24 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		})
 	}
 	async getNotPublishedItem({ itemId, resellItemId } = {}) {
-		return await this.caller.call('GET', `/${itemId}/goods/add/`, { resell_item_id: resellItemId })
+		return await this.caller.call('market', 'GET', `/${itemId}/goods/add/`, { resell_item_id: resellItemId })
 	}
 	async checkItem({ itemId, closeItem } = {}) {
-		return await this.caller.call('POST', `/${itemId}/goods/check`, {
+		return await this.caller.call('market', 'POST', `/${itemId}/goods/check`, {
 			close_item: closeItem
 		})
 	}
 	
 	async getEmailCode({ itemId, email } = {}) {
-		return await this.caller.call('GET', `/${itemId}/email-code/`, { email })
+		return await this.caller.call('market', 'GET', `/${itemId}/email-code/`, { email })
 	}
 
 	async refuseGuarantee({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/refuse-guarantee`)
+		return await this.caller.call('market', 'POST', `/${itemId}/refuse-guarantee`)
 	}
 	
 	async changePassword({ itemId, _cancel } = {}) {
-		return await this.caller.call('POST', `/${itemId}/change-password`, {
+		return await this.caller.call('market', 'POST', `/${itemId}/change-password`, {
 			_cancel: _cancel ? 1 : undefined
 		})
 	}
@@ -212,97 +213,96 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 					: undefined
 				: fields[key]
 		
-		return await this.caller.call('POST', `/${itemId}/edit/`, params)
+		return await this.caller.call('market', 'POST', `/${itemId}/edit/`, params)
 	}
 	
 	async addTag({ itemId, tagId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/tag/`, { tag_id: tagId })
+		return await this.caller.call('market', 'POST', `/${itemId}/tag/`, { tag_id: tagId })
 	}
 	
 	async deleteTag({ itemId, tagId } = {}) {
-		return await this.caller.call('DELETE', `/${itemId}/tag/`, { tag_id: tagId })
+		return await this.caller.call('market', 'DELETE', `/${itemId}/tag/`, { tag_id: tagId })
 	}
 
 	async deleteItem({ itemId, reason } = {}) {
-		return await this.caller.call('DELETE', `/${itemId}`, { reason })
+		return await this.caller.call('market', 'DELETE', `/${itemId}`, { reason })
 	}
 
 	async getMafile({ itemId } = {}) {
-		return await this.caller.call('GET', `/${itemId}/mafile/`)
+		return await this.caller.call('market', 'GET', `/${itemId}/mafile/`)
 	}
 
 	async getGuardCode({ itemId } = {}) {
-		return await this.caller.call('GET', `/${itemId}/guard-code/`)
+		return await this.caller.call('market', 'GET', `/${itemId}/guard-code/`)
 	}
 
 	async getTelegramCode({ itemId } = {}) {
-		return await this.caller.call('GET', `/${itemId}/telegram-login-code/`)
+		return await this.caller.call('market', 'GET', `/${itemId}/telegram-login-code/`)
 	}
 
 	async resetTelegramAuth({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/telegram-reset-authorizations/`)
+		return await this.caller.call('market', 'POST', `/${itemId}/telegram-reset-authorizations/`)
 	}
 
 	async getTempEmailPassword({ itemId } = {}) {
-		return await this.caller.call('GET', `/${itemId}/temp-email-password/`)
+		return await this.caller.call('market', 'GET', `/${itemId}/temp-email-password/`)
 	}
 
 	async fave({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/star/`)
+		return await this.caller.call('market', 'POST', `/${itemId}/star/`)
 	}
 
 	async unFave({ itemId } = {}) {
-		return await this.caller.call('DELETE', `/${itemId}/star/`)
+		return await this.caller.call('market', 'DELETE', `/${itemId}/star/`)
 	}
 
 	async stickItem({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/stick/`)
+		return await this.caller.call('market', 'POST', `/${itemId}/stick/`)
 	}
 
 	async unstickItem({ itemId } = {}) {
-		return await this.caller.call('DELETE', `/${itemId}/stick/`)
+		return await this.caller.call('market', 'DELETE', `/${itemId}/stick/`)
 	}
 
 	async changeOwner({ itemId, username, secretAnswer } = {}) {
-		return await this.caller.call('POST', `/${itemId}/change-owner/`, {
+		return await this.caller.call('market', 'POST', `/${itemId}/change-owner/`, {
 			username,
 			secret_answer: secretAnswer
 		})
 	}
 
 	async steamValue({ link, appId, currency, ignoreCache } = {}) {
-		return await this.caller.call('GET', `/steam-value/`, {
+		return await this.caller.call('market', 'GET', `/steam-value/`, {
 			link, app_id: appId, currency, ignore_cache: ignoreCache ? 1 : 0
 		})
 	}
 
 	async steamPreview({ itemId, type } = {}) {
-		return await this.caller.call('GET', `/${itemId}/steam-preview/`, { type })
+		return await this.caller.call('market', 'GET', `/${itemId}/steam-preview/`, { type })
 	}
 
 	async getCategoryParams({ categoryName } = {}) {
-		return await this.caller.call('GET', `/${categoryName}/params/`)
+		return await this.caller.call('market', 'GET', `/${categoryName}/params/`)
 	}
 
 	async getGames({ categoryName } = {}) {
-		return await this.caller.call('GET', `/${categoryName}/games/`)
+		return await this.caller.call('market', 'GET', `/${categoryName}/games/`)
 	}
 
-
 	async bumpItem({ itemId } = {}) {
-		return await this.caller.call('POST', `/${itemId}/bump/`)
+		return await this.caller.call('market', 'POST', `/${itemId}/bump/`)
 	}
 
 	async getCategories({ topQueries } = {}) {
-		return await this.caller.call('GET', `/category/`, { top_queries: topQueries ? 1 : 0 })
+		return await this.caller.call('market', 'GET', `/category/`, { top_queries: topQueries ? 1 : 0 })
 	}
 
 	async getMe() {
-		return await this.caller.call('GET', `/me/`)
+		return await this.caller.call('market', 'GET', `/me/`)
 	}
 
 	async editMe({ disableSteamGuard, userAllowAskDiscount, maxDiscountPercent, allowAcceptAccounts, hideFavorites, vkUa } = {}) {
-		return await this.caller.call('PUT', `/me/`, {
+		return await this.caller.call('market', 'PUT', `/me/`, {
 			disable_steam_guard: disableSteamGuard,
 			user_allow_ask_discount: userAllowAskDiscount,
 			max_discount_percent: maxDiscountPercent,
@@ -313,11 +313,11 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	}
 
 	async getProxys() {
-		return await this.caller.call('GET', `/proxy/`)
+		return await this.caller.call('market', 'GET', `/proxy/`)
 	}
 
 	async addProxy({ proxyIP, proxyPort, proxyLogin, proxyPassword, proxyRow } = {}) {
-		return await this.caller.call('POST', `/proxy/`, {
+		return await this.caller.call('market', 'POST', `/proxy/`, {
 			proxy_ip: proxyIP,
 			proxy_port: proxyPort,
 			proxy_user: proxyLogin,
@@ -327,7 +327,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	}
 
 	async deleteProxy({ proxyId, deleteAll } = {}) {
-		return await this.caller.call('DELETE', `/proxy/`, {
+		return await this.caller.call('market', 'DELETE', `/proxy/`, {
 			proxy_id: proxyId,
 			delete_all: deleteAll ? 1 : 0
 		})
@@ -343,7 +343,7 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 		hasEmailLoginData, EmailLoginData,
 		closeItem, emailType, allowAskDiscount,
 		proxyId, randomProxy, extraData } = {}) {
-		return await this.caller.call('POST', `/item/fast-sell`, {
+		return await this.caller.call('market', 'POST', `/item/fast-sell`, {
 			title, title_en: titleEn,
 			price, category_id: categoryId,
 			currency, item_origin: itemOrigin,
@@ -362,18 +362,18 @@ export class LZTApiMarketGroup extends LZTApiGroup {
 	}
 
     async getAuction({ itemId } = {}){
-        return await this.caller.call('GET', `/${itemId}/auction`)
+        return await this.caller.call('market', 'GET', `/${itemId}/auction`)
     }
 
     async addBid({ itemId, currency, amount } = {}){
-        return await this.caller.call('POST', `/${itemId}/auction/bid`, {
+        return await this.caller.call('market', 'POST', `/${itemId}/auction/bid`, {
             currency,
             amount
         })
     }
 
     async removeBid({ itemId, bidId } = {}) {
-        return await this.caller.call('DELETE', `/${itemId}/auction/bid`, {
+        return await this.caller.call('market', 'DELETE', `/${itemId}/auction/bid`, {
             bid_id: bidId
         })
     }

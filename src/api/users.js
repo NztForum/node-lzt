@@ -4,7 +4,7 @@ export class LZTApiUsersGroup extends LZTApiGroup {
 	static name = 'users'
 	
 	async getUsers({ page, limit } = {}) {
-		return await this.caller.call('GET', '/users', { page, limit })
+		return await this.caller.call('forum', 'GET', '/users', { page, limit })
 	}
 	
 	async create({
@@ -12,7 +12,7 @@ export class LZTApiUsersGroup extends LZTApiGroup {
 		userDobDay, userDobMonth, userDobYear,
 		fields, clientId, extraData, extraTimestamp
 	} = {}) {
-		return await this.caller.call('POST', '/users', {
+		return await this.caller.call('forum', 'POST', '/users', {
 			user_email: userEmail,
 			username,
 			password,
@@ -28,11 +28,11 @@ export class LZTApiUsersGroup extends LZTApiGroup {
 	}
 	
 	async getFields() {
-		return await this.caller.call('GET', '/users/fields')
+		return await this.caller.call('forum', 'GET', '/users/fields')
 	}
 	
 	async getUser({ userId = 'me' } = {}) {
-		return await this.caller.call('GET', `/users/${userId}`)
+		return await this.caller.call('forum', 'GET', `/users/${userId}`)
 	}
 	
 	async edit({
@@ -42,7 +42,7 @@ export class LZTApiUsersGroup extends LZTApiGroup {
 		primaryGroupId, secondaryGroupIds,
 		userDobDay, userDobMonth, userDobYear
 	} = {}) {
-		return await this.caller.call('PUT', `/users/${userId}`, {
+		return await this.caller.call('forum', 'PUT', `/users/${userId}`, {
 			password,
 			password_old: passwordOld,
 			password_algo: passwordAlgo,
@@ -59,46 +59,46 @@ export class LZTApiUsersGroup extends LZTApiGroup {
 	}
 	
 	async setAvatar({ userId = 'me', avatar } = {}) {
-		return await this.caller.call('POST', `/users/${userId}/avatar`, { avatar })
+		return await this.caller.call('forum', 'POST', `/users/${userId}/avatar`, { avatar })
 	}
 	
 	async deleteAvatar({ userId = 'me' } = {}) {
-		return await this.caller.call('DELETE', `/users/${userId}/avatar`)
+		return await this.caller.call('forum', 'DELETE', `/users/${userId}/avatar`)
 	}
 	
 	async getFollowers({ userId = 'me', order, page, limit } = {}) {
-		return await this.caller.call('GET', `/users/${userId}/followers`, { order, page, limit })
+		return await this.caller.call('forum', 'GET', `/users/${userId}/followers`, { order, page, limit })
 	}
 	
 	async follow({ userId = 'me' } = {}) {
-		return await this.caller.call('POST', `/users/${userId}/followers`)
+		return await this.caller.call('forum', 'POST', `/users/${userId}/followers`)
 	}
 	
 	async unfollow({ userId = 'me' } = {}) {
-		return await this.caller.call('DELETE', `/users/${userId}/followers`)
+		return await this.caller.call('forum', 'DELETE', `/users/${userId}/followers`)
 	}
 	
 	async getFollowings({ userId = 'me', order, page, limit } = {}) {
-		return await this.caller.call('GET', `/users/${userId}/followings`, { order, page, limit })
+		return await this.caller.call('forum', 'GET', `/users/${userId}/followings`, { order, page, limit })
 	}
 	
 	async getIgnored() {
-		return await this.caller.call('GET', '/users/ignored')
+		return await this.caller.call('forum', 'GET', '/users/ignored')
 	}
 	
 	async ignore({ userId = 'me' } = {}) {
-		return await this.caller.call('GET', `/users/${userId}/ignore`)
+		return await this.caller.call('forum', 'GET', `/users/${userId}/ignore`)
 	}
 	
 	async uningore({ userId = 'me' } = {}) {
-		return await this.caller.call('DELETE', `/users/${userId}/ignore`)
+		return await this.caller.call('forum', 'DELETE', `/users/${userId}/ignore`)
 	}
 	
 	async getGroups() {
-		return await this.caller.call('GET', '/users/groups')
+		return await this.caller.call('forum', 'GET', '/users/groups')
 	}
 	
 	async getUserGroups({ userId = 'me' } = {}) {
-		return await this.caller.call('GET', `/users/${userId}/groups`)
+		return await this.caller.call('forum', 'GET', `/users/${userId}/groups`)
 	}
 }
